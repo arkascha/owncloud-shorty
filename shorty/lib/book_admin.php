@@ -60,7 +60,7 @@ class BookAdminGuide extends Plugin\Book
 
 	protected function readChapter($chapter) {
 		switch($chapter) {
-			case 'abstract':      return $this->renderDocFile('shorty', 'ABSTRACT');
+			case 'abstract':      return $this->renderDocFile('shorty', 'abstract.md');
 			case 'introduction':  return $this->renderDocFile('shorty', 'README');
 			case 'usage':         return $this->renderDocFile('shorty', 'USAGE');
 			case 'configuration': return $this->renderDocFile('shorty', 'CONFIGURATION');
