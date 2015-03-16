@@ -1,3 +1,5 @@
+**TODO:** Re-format for compatibility between markdown/slimdown!
+
 # Configuration
 -----
 

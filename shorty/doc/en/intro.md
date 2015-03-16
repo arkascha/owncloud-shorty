@@ -7,6 +7,7 @@ A new entry (a "Shorty"), can be created either manually by entering a URL ("New
 
 
 Each Shorty contains a source and a target URL. The source URL can be used to be posted in forums, sent by email or whatever. It is typically much shorter than the full blown target URL on the web, though this may depend on which shortening service you´re using as a "backend". Basic control is implemented to define who can access your Shortys. They can be set 'private', 'shared', 'public' or 'blocked'. They can also be set to expire on a certain date and of course can be removed again. Please consult the [User´s guide](shorty_user.md) for detailed information.
+
 -----
 
 ## Current status  
