@@ -1,3 +1,5 @@
+**TODO:** This file is a draft and needs refinement!
+
 # Shorty Documentation
 -----
 
@@ -16,5 +18,4 @@
  
  5. [Legal and other stuff](legal.md)
   COPYRIGHT LICENSE ROADMAP CHANGELOG CONTRIBUTIONS CREDITS 
-  (Verweisliste oder Inhalte zusammengefasst)
 

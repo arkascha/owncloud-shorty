@@ -22,4 +22,4 @@ Known shortcomings are:
 * only very basic input validation is done.  
 * access control is not yet fine grained, no user or group support exists.  
 * markup, scripting and style definitions are the work of a web app newbie.  
-Please excuse any inconvenience.
+**Please excuse any inconvenience.**

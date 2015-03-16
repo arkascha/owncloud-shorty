@@ -1,7 +1,7 @@
 # Contributions:
 -----
 
-I'd be more than happy to welcome all contributions to this little experiment.
+I´d be more than happy to welcome all contributions to this little experiment.
 Drop me a note, an idea, a bottle of wine, a job independant of location!
 
 Christian Reiner

@@ -7,10 +7,11 @@ fixed, since the problem originates in the jQuery library not supporting the
 khtml engine.
 
 - There are some issues when using Shorty with a MS IE browser:
-These issues most likely won't get fixed completely, that browser simply is a mess...
+These issues most likely won´t get fixed completely, that browser simply is a mess...
 MS IE versions prior to 9 are not supported at all, those browsers simply violate
 too many web standards. From version 9 onwards Shorty is usable, but a few
 issues remain:
+
 * some style glitches like missing rounded corners in dialogs fieldset frames.
 There probably are many more issues being the result of the fact that this browser
 still is not as compatible to widespread standards as others, competetive browsers.
