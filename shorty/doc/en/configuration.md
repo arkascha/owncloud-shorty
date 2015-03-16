@@ -20,14 +20,13 @@ configuration of rewrite rules on the server side. So it is only an option for
 experienced administrators with access to the server configuration, be it
 centralized or based on decentralized per-directory rules (".htaccess files").
 The rules must be configured such that all requests to urls of the scheme
-`<base url><shorty key>` are mapped directly onto the relay service web url of
-the Shorty app:
-`http://<domain>/<owncloud>/public.php?service=shorty_relay&id=<shorty key>`.
+`<base_url><shorty_key>` are mapped directly onto the relay service web url of
+the Shorty app: `http://<domain>/<owncloud>/public.php?service=shorty_relay&id=<shorty_key>`.
 
 If in doubt refer to the url shown as "relay url" inside the sharing dialog for
 each Shorty. That scheme is the one you want to rewrite your requests to, you
 just have to make sure the individual <shorty key> survives the redirect.
-The `<shorty key>` is a string, 6-12 characters long, hard to predict. It is
+The `<shorty_key>` is a string, 6-12 characters long, hard to predict. It is
 guaranteed to be unique throughout the system (though in a technically crude
 manner...).
 
@@ -40,8 +39,8 @@ The perfect situation for the definition of a meaningful static
 backend would be a domain with a very short name and configuration access to
 something close to the web root. At least you should try to find a setup where
 the web path of the ownCloud application is not part of the base url. So that
-you get something like `http://<domain name>/<shorty key>`.
-(Note that the `<shorty key>` is NOT part of the base url configuration).
+you get something like `http://<domain_name>/<shorty_key>`.
+(Note that the `<shorty_key>` is NOT part of the base url configuration).
 
 Your setup will automatically be verified by Shorty during the setup. Only in
 case of a successful verification the setup will be accepted (valid and usable).
@@ -54,12 +53,13 @@ the settings and the user preferences.
 You need some kind of rewriting rule to map the requests to the short base url
 onto the final url of Shortys relay service. Typically a rewriting module for
 the http server is used for such a purpose, e.g. mod_rewrite in case of the 
-Apache http server. The rule must look something like this:
-> RewriteEngine   on  
-> SSLProxyEngine  on  
-> RewriteCond     %{HTTP_HOST}            ^proxy.domain.xyz$                                                [NC]  
-> RewriteRule     ^/([A-Za-z0-9]{4,12})$  https://owncloud.domain.xyz/public.php?service=shorty_relay&id=$1 [QSA,L]
-
+Apache http server. The rule must look something like this:  
+```
+RewriteEngine  on  
+SSLProxyEngine on  
+RewriteCond    %{HTTP_HOST}              ^proxy.domain.xyz$ [NC]  
+RewriteRule    ^/([A-Za-z0-9]{4,12})$    https://owncloud.domain.xyz/public.php?service=shorty_relay&id=$1 [QSA,L]
+```  
 Where "proxy.domain.xyz" is the short domain used in the base url setup and
 "owncloud.domain.xyz" is the domain where owncloud is delivered from. Different
 variants exist obviously, but the basic idea should be clear...
@@ -68,12 +68,13 @@ variants exist obviously, but the basic idea should be clear...
 
 ### 1.b Configuration of a static backend, cross domain setup
 Obviously you need a similar rewriting setup to the first alternative:  
-> RewriteEngine   on  
-> SSLProxyEngine  on  
-> RewriteCond     %{HTTP_HOST}            ^proxy.domain.xyz$ [NC]  
-> RewriteRule     ^/([A-Za-z0-9]{4,12})$  https://owncloud.domain.xyz/public.php?service=shorty_relay&id=$1 [QSA,L,P]  
-> RewriteRule     ^/(.*)$                 https://owncloud.domain.xyz/$1 [QSA,L,P]  
-
+```
+RewriteEngine   on  
+SSLProxyEngine  on  
+RewriteCond     %{HTTP_HOST}            ^proxy.domain.xyz$ [NC]  
+RewriteRule     ^/([A-Za-z0-9]{4,12})$  https://owncloud.domain.xyz/public.php?service=shorty_relay&id=$1 [QSA,L,P]  
+RewriteRule     ^/(.*)$                 https://owncloud.domain.xyz/$1 [QSA,L,P]  
+```
 Note the additional 'P' flag in the RewriteRules. This is required (and relies
 on the internal proxy module) because otherwise the cross domain setup will be
 blocked by most modern browsers due to cross domain security considerations.
@@ -81,11 +82,12 @@ In additional you need to whitelist "proxy.domain.xyz" inside your owncloud
 configuration. Otherwise owncloud will reject these requests. Whitelisting is
 possible by simply adding the domain name inside the global configuration file
 config/config.php:
->  'trusted_domains' =>  array (  
->    0 => 'owncloud.domain.xyz',  
->    1 => 'proxy.domain.xyz',  
->  )  
-
+```
+'trusted_domains' =>  array (  
+    0 => 'owncloud.domain.xyz',  
+    1 => 'proxy.domain.xyz',  
+  )  
+```
 The first rule relays the request to the Shorty itself, whilst the second one
 is a general relay that allows you to interact using the whitelisted domain.
 Without that second rule the relaying service would be crippled and unusable.
