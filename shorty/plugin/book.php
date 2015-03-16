@@ -57,7 +57,9 @@ abstract class Book extends Document
 
 	protected function renderDocFile($app, $name)
 	{
-		$path = sprintf('%s/apps/%s/doc/%s', getcwd(), $app, $name);
+//TODO: Implement switching the directory according to the user's locale and 
+//a fallback strategy for unavailable translations here:
+		$path = sprintf('%s/apps/%s/doc/en/%s', getcwd(), $app, $name);
 		return \Slimdown::render(file_get_contents($path));
 	}
 
